@@ -2,6 +2,9 @@ import math
 from bytes_utils import iterate_bits
 
 class RLE():
+    """
+    RLE transferring between an integer to sequence of bits representing the integer and backwards
+    """
     def __init__(self):
         self._number = None
     
@@ -46,7 +49,6 @@ class RLE():
         self._number = int.from_bytes(bytes[position:position + number_bytes_length], 'big')
         position += number_bytes_length
         return position
-
 
 
 def test_write():

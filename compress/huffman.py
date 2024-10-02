@@ -26,6 +26,10 @@ def flatten_dict(d, prefix=''):
     return flatten
 
 class Huffman():
+    """
+    Huffman receives list of int and returns a 0-1 dict
+    The dict mapping the Huffman code to the original int numbers
+    """
     def __init__(self, numbers: List[int]):
         self._numbers = numbers
     
@@ -54,18 +58,19 @@ class Huffman():
         counter = Counter(items_hierarchy)
         most_common = counter.most_common()
         while len(most_common) > 1:
+            # Get the 2 least common numbers together
             combined_items = (most_common[-1][0], most_common[-2][0])
             Huffman._list_replace(
                 items_hierarchy, [most_common[-1][0], most_common[-2][0]], [combined_items, combined_items]
             )
-            # items_hierarchy = Huffman._list_replace(items_hierarchy, most_common[-1][0], combined_items)
-            # items_hierarchy = Huffman._list_replace(items_hierarchy, most_common[-2][0], combined_items)
+            # Build the most_common hierarchy again after switching the 2 least common by 1
             counter = Counter(items_hierarchy)
             most_common = counter.most_common()
         return items_hierarchy[0]
         
     @staticmethod
     def unpack_items_hierarchy_to_dict(items_hierarchy) -> Dict[int, Union[Dict, int]]:
+        # Build the final dict by the final items hierarcy
         if type(items_hierarchy) != tuple:
             return items_hierarchy
         

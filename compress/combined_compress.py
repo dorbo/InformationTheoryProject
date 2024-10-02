@@ -87,12 +87,5 @@ def test():
     with open('compressed_test.cm', 'wb') as f:
         f.write(compress(b'aeacdaecdaecd'))
 
-def compress_dickens():
-    with open('dickens.txt', 'rb') as f:
-        data = f.read()
-    with open('compressed.cm', 'wb') as f:
-        f.write(compress(data))
-
 if __name__ == '__main__':
-    compress_dickens()
-    # test()
+    test()

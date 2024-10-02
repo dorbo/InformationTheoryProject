@@ -33,10 +33,8 @@ def reconstruct_data(compressed_data, flatten_shift, flatten_length, len_mapping
     position = len(data)
     lz77_pairs = get_lz77_pairs(compressed_data[position:], flatten_shift, flatten_length)
     for shift, length in lz77_pairs[:len_mapping]:
-        a = data[position - shift : position - shift + length]
         data += data[position - shift : position - shift + length]
         position += length
-        print(data[len(LZ77.LATIN1_BYTES):])
     return data[len(LZ77.LATIN1_BYTES):]
 
 def decompress(data):
@@ -60,7 +58,8 @@ def decompress(data):
     return reconstruct_data(data[position:], flatten_shift, flatten_length, len_mapping)
 
 def test():
-    with open('compressed_test.cm', 'rb') as f:
+    file_name = 'file_to_compress.txt.cm'
+    with open(file_name, 'rb') as f:
         data = f.read()
     print(decompress(data))
 
